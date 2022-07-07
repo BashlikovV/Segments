@@ -37,6 +37,13 @@ public class Segment {
         Segment segment1 = new Segment(start, end);
         Point resPoint;
 
+        if (segment1.start.getX() < segment1.start.getY() && 
+                segment1.end.getX() > segment1.end.getY() &&
+                segment2.start.getX() > segment2.start.getY() && 
+                segment2.end.getX() == segment2.end.getY()) {
+            return null;
+        }
+
         double k1 = (segment1.start.getY() - segment1.end.getY()) /
                 (segment1.start.getX() - segment1.end.getX());
         double b1 = segment1.end.getY() - k1 * segment1.end.getX();
@@ -48,6 +55,8 @@ public class Segment {
         if (b2 == b1 && k1 == k2) {
             return null;
         } else if (k1 == k2) {
+            return null;
+        } else if (k1 > k2 && b1 > b2) {
             return null;
         }
 
